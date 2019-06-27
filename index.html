@@ -4,61 +4,67 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Giphy gif Generator</title>
-        <link rel="stylesheet" href="assets/css/style.css" />
-    </head>
-    <body>
-        <header class="heading">
-            <h1 class="heading--title">Giphy Gif Generator</h1>
-            <div class="heading--form">
-                <form class="heading--form__container">
-                    <div class="heading--form--topic">
-                        <label
-                            for="topic-select"
-                            class="heading--form--label heading--form--label__topic"
-                            >Enter A Topic:
-                        </label>
-                        <div class="container-input">
-                            <input
-                                type="text"
-                                class="heading--form--input heading--form--input__topic"
-                                name="topic-select"
-                                id="topic-textbox"
-                                autocomplete="off"
-                            />
-                        </div>
-                    </div>
-                    <div class="heading--form--quantity">
-                        <label
-                            for="gif-count"
-                            class="heading--form--label heading--form--label__quantity"
-                            >Gifs To Print: <span id="current-quantity"></span
-                        ></label>
-                        <input
-                            class="heading--form--input heading--form--input__quantity"
-                            type="range"
-                            name="quantity-select"
-                            id="quantity-input"
-                            min="1"
-                            max="10"
-                            step="1"
-                        />
-                    </div>
-                </form>
-                <button type="submit" class="heading--form--btn">
-                    Generate!
-                </button>
-            </div>
-        </header>
-        <main>
-            
-        </main>
+        <title>Giphy Library</title>
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/style.css" />
         <script
             src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"
         ></script>
-        <script src="assets/js/style.js"></script>
-        <script src="assets/js/main.js"></script>
+    </head>
+    <body>
+        <span class="toggle-switch">&Gt;</span>
+
+        <header>
+            <h1 class="title"><span>Giphy</span><br><span>Library</span></h1>
+
+            <div class="input-container">
+                    <input type="text" name="input-topic" id="input-topic" class="input">
+                    <span class="input-text">Pick A Topic</span>
+                    <span class="underscore"></span>
+            </div>
+            <div class="submit-topic-container">
+                <button id="submit-topic" class="btn-submit">
+                    Add
+                </button>
+            </div>
+            <div class="input-container">
+                    <input type="number" min="1" max="10" value="10" step="1" name="input-topic" id="input-number" class="input">
+                    <span class="input-text">How Many Gifs? (1-10)</span>
+                    <span class="underscore"></span>
+            </div>
+
+            <div class="input-container">
+                    <select name="ratings" class="input" id="input-rating">
+                            <option class="ratings-option" value="Y">Y</option>
+                            <option class="ratings-option" value="G">G</option>
+                            <option class="ratings-option" value="PG">PG</option>
+                            <option class="ratings-option" value="PG-13">PG-13</option>
+                            <option class="ratings-option" value="R">R</option>
+                    </select>
+                    <span class="input-text">Rating?</span>
+                    <span class="underscore"></span>
+            </div>
+
+            <div class="reset-gifs-container">
+                    <button id="reset-gifs" class="btn-submit">
+                        Reset Gifs
+                    </button>
+                </div>
+            
+        </header>
+        <main>
+            <section class="btn-list">
+            </section>
+
+            <section class="gif-list">
+                
+            </section>
+        </main>
+
+
+        <script src="/assets/js/main.js"></script>
     </body>
 </html>
+
