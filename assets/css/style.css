@@ -54,13 +54,14 @@ header {
   left: 0;
   width: 17.5vw;
   height: 100vh;
-  z-index: 10;
+  z-index: 1000;
   transform: translateX(-17.5vw);
   transition: all 0.5s;
   border-right: 0.025rem solid #f2bb16;
 }
 
-header .title {
+header .title,
+header .subtitle {
   margin-top: 5vh;
   margin-left: 1vw;
   color: #f2bb16;
@@ -69,14 +70,21 @@ header .title {
   line-height: 0.8;
 }
 
-header .title span:nth-child(1) {
+header .title span:nth-child(1),
+header .subtitle span:nth-child(1) {
   color: white;
   font-weight: 300;
   font-style: italic;
 }
 
-header .title span:nth-child(2) {
+header .title span:nth-child(2),
+header .subtitle span:nth-child(2) {
   font-weight: 700;
+}
+
+header .subtitle {
+  font-weight: 300;
+  font-style: italic;
 }
 
 header .input-container {
@@ -137,6 +145,15 @@ header .input-container #input-number:invalid ~ .underscore::after {
   background-color: #bd0000;
 }
 
+header .input-container input[type=number]::-webkit-inner-spin-button,
+header .input-container input[type=number]::-webkit-outer-spin-button {
+  cursor: pointer;
+  color: #f2bb16;
+  padding: 1.125rem;
+  transform: rotate(90deg);
+  margin: auto .1rem;
+}
+
 header .input-container .underscore::before {
   left: 50%;
   background-color: #f2bb16;
@@ -179,7 +196,7 @@ header .reset-gifs-container {
 header .reset-gifs-container #reset-gifs {
   position: absolute;
   left: 50%;
-  top: 3rem;
+  top: 10rem;
   transform: translateX(-50%);
   padding: 1rem 1.5rem;
   width: 90%;
@@ -226,7 +243,6 @@ main {
   margin-left: auto;
   width: 95vw;
   transition: all 0.5s;
-  height: 150vh;
   position: relative;
 }
 
@@ -274,7 +290,7 @@ main .btn-list .btn-topic:focus {
 main .gif-list {
   display: grid;
   grid-column-gap: 1.5rem;
-  grid-row-gap: 0.5rem;
+  grid-row-gap: 2.5rem;
   grid-row: auto;
   grid-template-columns: repeat(auto-fill, 15rem);
   max-width: 95%;
@@ -283,21 +299,65 @@ main .gif-list {
   height: auto;
 }
 
-main .gif-list img {
+main .gif-list .gif-container {
   position: relative;
+  height: 14rem;
+}
+
+main .gif-list .gif-container .gif {
+  position: absolute;
+  left: 50%;
+  bottom: 40%;
   text-align: center;
   margin: 0 auto;
-  transform: scale(1);
+  transform: scale(1) translate(-50%, 50%);
   max-width: 100%;
-  height: auto;
+  max-height: 85%;
   transition: 0.7s all;
 }
 
-main .gif-list img:hover {
-  border-radius: 1rem;
-  transform: scale(1.4);
+main .gif-list .gif-container .gif:hover {
+  border-radius: .2rem;
+  transform: scale(1.4) translate(-37.5%, 37.5%);
   z-index: 250;
   width: auto;
+}
+
+main .gif-list .gif-container .gif:hover + .download-link {
+  opacity: 1;
+  z-index: 500;
+  transition: .55s all .25s;
+}
+
+main .gif-list .gif-container .download-link {
+  opacity: 0;
+  position: absolute;
+  z-index: 500;
+  left: 50%;
+  bottom: 0%;
+  text-align: center;
+  transform: translate(-50%, 50%);
+  width: 100%;
+  padding: 1rem;
+  color: #dedede;
+  border: #dedede .05rem solid;
+  border-radius: .15rem;
+  background-color: rgba(99, 99, 99, 0.65);
+  text-decoration: none;
+  transition: .25s all;
+}
+
+main .gif-list .gif-container .download-link:hover {
+  opacity: 1;
+  z-index: 500;
+  transition: .55s all .25s;
+}
+
+main .gif-list .gif-container .gif-rating {
+  color: #f2911b;
+  text-align: center;
+  border-bottom: .1rem solid #ededed;
+  margin: 1rem 4rem 0;
 }
 
 .toggle-switch {
@@ -305,7 +365,7 @@ main .gif-list img:hover {
   cursor: pointer;
   font-size: 3rem;
   position: fixed;
-  z-index: 100;
+  z-index: 1001;
   left: 2%;
   top: 0.5%;
   transform: translateX(0) rotateX(0) rotateZ(0);

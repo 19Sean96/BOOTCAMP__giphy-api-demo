@@ -58,7 +58,6 @@ body {
     max-width: 100vw;
     min-height: 100vh;
     display: grid;
-    // grid-template-columns: 1fr 5fr;
     background: url(../images/ep_naturalblack.png);
 }
 
@@ -69,12 +68,13 @@ header {
     left: 0;
     width: 17.5vw;
     height: 100vh;
-    z-index: 10;
+    z-index: 1000;
     transform: translateX(-17.5vw);
     transition: all 0.5s;
     border-right: 0.025rem solid $yellow-pure;
 
-    .title {
+    .title,
+    .subtitle {
         margin-top: 5vh;
         margin-left: 1vw;
         color: $yellow-pure;
@@ -93,11 +93,15 @@ header {
         }
     }
 
+    .subtitle {
+        font-weight: 300;
+        font-style: italic;
+    }
+
     .input-container {
         position: relative;
         width: 100%;
         padding: 1rem;
-        // background-color: tomato;
 
         .input-text {
             position: absolute;
@@ -151,10 +155,14 @@ header {
             background-color: #bd0000;
         }
 
-        // #input-number:valid ~ .underscore::before,
-        // #input-number:valid ~ .underscore::after {
-        //     background-color: #00bd00;
-        // }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            cursor: pointer;
+            color: $yellow-pure;
+            padding: 1.125rem;
+            transform: rotate(90deg);
+            margin: auto .1rem;
+        }
 
         .underscore::before {
             left: 50%;
@@ -200,7 +208,7 @@ header {
         #reset-gifs {
             position: absolute;
             left: 50%;
-            top: 3rem;
+            top: 10rem;
             transform: translateX(-50%);
             padding: 1rem 1.5rem;
             width: 90%;
@@ -249,7 +257,6 @@ main {
     margin-left: auto;
     width: 95vw;
     transition: all 0.5s;
-    height: 150vh;
     position: relative;
 
     .btn-list {
@@ -295,31 +302,77 @@ main {
     .gif-list {
         display: grid;
         grid-column-gap: 1.5rem;
-        grid-row-gap: 0.5rem;
+        grid-row-gap: 2.5rem;
         grid-row: auto;
         grid-template-columns: repeat(auto-fill, 15rem);
         max-width: 95%;
         min-height: 80vh;
         margin: 0 auto;
         height: auto;
-        // background-color: #F2BB16;
 
-        img {
+        .gif-container {
             position: relative;
-            text-align: center;
-            margin: 0 auto;
-            transform: scale(1);
-            max-width: 100%;
-            height: auto;
-            transition: 0.7s all;
+            height: 14rem;
 
-            &:hover {
-                border-radius: 1rem;
-                transform: scale(1.4);
-                z-index: 250;
-                width: auto;
+            .gif {
+                position: absolute;
+                left: 50%;
+                bottom: 40%;
+                text-align: center;
+                margin: 0 auto;
+                transform: scale(1) translate(-50%, 50%);
+                max-width: 100%;
+                max-height: 85%;
+                transition: 0.7s all;
+    
+                &:hover {
+                    border-radius: .2rem;
+                    transform: scale(1.4) translate(-37.5%, 37.5%);
+                    z-index: 250;
+                    width: auto;
+
+                    + .download-link {
+                        opacity: 1;
+                        z-index: 500;
+                        transition: .55s all .25s;
+                    }
+                }
+            }
+
+            .download-link {
+                opacity: 0;
+                position: absolute;
+                z-index: 500;
+                left: 50%;
+                bottom: 0%;
+                text-align: center;
+                transform: translate(-50%, 50%);
+                width: 100%;
+                padding: 1rem;
+                color: #dedede;
+                border: #dedede .05rem solid;
+                border-radius: .15rem;
+                background-color: rgba(99, 99, 99, 0.65);
+                text-decoration: none;
+                transition: .25s all;
+
+                &:hover {
+                    opacity: 1;
+                    z-index: 500;
+                    transition: .55s all .25s;
+                }
+
+            }
+
+            .gif-rating {
+                color: $orange-pure;
+                text-align: center;
+                border-bottom: .1rem solid #ededed;
+                margin: 1rem 4rem 0;
             }
         }
+
+
     }
 }
 
@@ -328,7 +381,7 @@ main {
     cursor: pointer;
     font-size: 3rem;
     position: fixed;
-    z-index: 100;
+    z-index: 1001;
     left: 2%;
     top: 0.5%;
     transform: translateX(0) rotateX(0) rotateZ(0);

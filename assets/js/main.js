@@ -28,21 +28,24 @@ $(document).ready(function() {
         });
     }
 
-    $("body").on('click', '.btn-topic', function(e) {
+    $("body").on("click", ".btn-topic", function(e) {
         e.preventDefault();
 
-        let topic = $(this).text().substring(1);
+        let topic = $(this)
+            .text()
+            .substring(1);
         // let quantity = $("#quantity-input").val();
-        let quantity = $('#input-number').val();
+        let quantity = $("#input-number").val();
         const key = "k9dznCk2MFJkG5XhDfuhzrVfPaBNawcX";
-        let rating = $('#input-rating').val();
+        let rating = $("#input-rating").val();
         let gifArr = [];
 
         for (let i = 0; i < parseInt(quantity); i++) {
             let giphyURL = `https://api.giphy.com/v1/gifs/random?api_key=${key}&tag=${topic}&rating=${rating}&lang=en`;
+            // &rating=${rating}
             //for search endpoint API
             //&limit=${quantity}&offset=0
-            j=j;
+            j = j;
             $.ajax({
                 url: giphyURL,
                 method: "GET"
@@ -50,6 +53,7 @@ $(document).ready(function() {
                 console.log(j);
                 let results = response.data;
                 console.log(results);
+                // console.log(results.rating);
                 gifArr.push(results);
                 console.log(gifArr);
                 // console.log(result);
@@ -62,12 +66,32 @@ $(document).ready(function() {
 
                 // $('main').append(img);
                 // console.log(result.data.length);
+                const container = $('<div>').addClass('gif-container');
+                const ratingPar = $('<p>')
+                    .addClass('gif-rating')
+                    .html(`Rating: ${rating}`);
+                const download = $('<a>')
+                    .attr({
+                        'href': gifArr[i].images.fixed_height.url,
+                        // 'download': `${gifArr[i].slug}.gif`
+                        'download': gifArr[i].images.fixed_height.url,
+                        'target': '_blank'
+                    })
+                    .addClass('download-link')
+                    .text('Download');
+                const img = $("<img>")
+                    .attr("src", gifArr[i].images.fixed_height_still.url)
+                    .addClass("gif")
+                    .attr("index", j)
+                    .attr("src-animate", gifArr[i].images.fixed_height.url)
+                    .attr("src-still", gifArr[i].images.fixed_height_still.url);
+                
+                container
+                    .append(img)
+                    .append(download)
+                    .append(ratingPar);
 
-                const img = $("<img>").attr(
-                    "src",
-                    gifArr[i].images.fixed_height_still.url
-                ).addClass('gif').attr('index', j).attr('src-animate', gifArr[i].images.fixed_height.url).attr('src-still', gifArr[i].images.fixed_height_still.url);
-                $(".gif-list").append(img);
+                $(".gif-list").append(container);
                 j++;
             });
             // j++;
@@ -81,14 +105,14 @@ $(document).ready(function() {
         // });
     });
 
-    $('body').on('click', '.gif', function (e) {
+    $("body").on("click", ".gif", function(e) {
         e.preventDefault();
-        const animateURL = $(this).attr('src-animate');
-        const stillURL = $(this).attr('src-still');
-        if($(this).attr('src') == stillURL) {
-            $(this).attr('src', animateURL);
-        } else if ($(this).attr('src') == animateURL) {
-            $(this).attr('src', stillURL);
+        const animateURL = $(this).attr("src-animate");
+        const stillURL = $(this).attr("src-still");
+        if ($(this).attr("src") == stillURL) {
+            $(this).attr("src", animateURL);
+        } else if ($(this).attr("src") == animateURL) {
+            $(this).attr("src", stillURL);
         }
     });
 
@@ -100,7 +124,7 @@ $(document).ready(function() {
         $("main").toggleClass("widthToggle");
     });
 
-    $('body').on('click','.remove-btn', function (e) {
+    $("body").on("click", ".remove-btn", function(e) {
         e.preventDefault();
         console.log($(this).html());
         $(this)
@@ -131,10 +155,14 @@ $(document).ready(function() {
         generateButtons();
     });
 
-    $('#input-number').keydown(function (e) { 
-        $(this).val('');
+    $("#input-number").keydown(function(e) {
+        $(this).val("");
+    });
+
+    $("#reset-gifs").click(function(e) {
+        e.preventDefault();
+        $(".gif-list").empty();
     });
 
     generateButtons();
 });
-
