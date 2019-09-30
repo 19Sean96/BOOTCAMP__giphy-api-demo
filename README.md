@@ -6,7 +6,9 @@ This app is powered by the [Giphy API](https://developers.giphy.com/).
 
 ## Getting Started
 
-As a front-end application, there is no installation needed. Check out the demo [here](https://19sean96.github.io/gif-generator-MAX/).
+As a front-end application, there is no installation needed. 
+
+Check out the demo [here](https://19sean96.github.io/gif-generator-MAX/).
 
 ## Built With
 
